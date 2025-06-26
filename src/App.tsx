@@ -1,35 +1,83 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Header from './components/Header';
+import ProductCard from './components/ProductCard';
+import ProductModal from './components/ProductModal';
+import CartSidebar from './components/CartSidebar';
+import { products, Products } from './data/products'; 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
+  const [isCartOpen, setCartOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<string>('Todos');
+
+  const filters = ['Todos', 'Legging', 'Top', 'Conjunto'];
+
+  const filteredProducts = activeFilter === 'Todos'
+    ? products
+    : products.filter(p => p.category === activeFilter);
+
+  const popularProducts = products.filter(p => p.isPopular);
+
+  const handleOpenModal = (product: Products) => {
+    setSelectedProduct(product);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header onCartClick={() => setCartOpen(true)} />
+      
+      <main className="container">
+        {/* Seção de Catálogo */}
+        <section id="catalogo" className="page-section">
+          <h2 className="page-section__title">Nosso Catálogo</h2>
+          <p className="page-section__subtitle">Encontre o look perfeito para o seu treino.</p>
+          
+          <div className="filters">
+            {filters.map(filter => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`filters__btn ${activeFilter === filter ? 'active' : ''}`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+
+          <div className="product-grid">
+            {filteredProducts.map(product => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                onImageClick={() => handleOpenModal(product)} 
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Seção Mais Populares */}
+        <section id="populares" className="page-section">
+          <h2 className="page-section__title">Mais Populares 🔥</h2>
+          <div className="product-grid">
+            {popularProducts.map(product => (
+              <ProductCard 
+                key={product.id} 
+                product={product}
+                onImageClick={() => handleOpenModal(product)}
+              />
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <ProductModal product={selectedProduct} onClose={handleCloseModal} />
+      <CartSidebar isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

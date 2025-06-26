@@ -1,0 +1,10 @@
+// Este arquivo agora apenas junta os módulos de estilo.
+// Usamos @use em vez de @import.
+
+@use 'variables';
+@use 'base';
+@use './components/pages/Home';
+@use 'components/Header';
+@use 'components/ProductCard';
+@use 'components/ProductModal';
+@use 'components/CartSidebar';

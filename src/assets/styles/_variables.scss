@@ -1,0 +1,29 @@
+// src/assets/styles/_variables.scss
+
+// Colors
+$primary-color: #FF4081;
+$primary-light: #FF80AB;
+$primary-dark: #F50057;
+$secondary-color: #00E5FF;
+$background-color: #F7F9FC;
+$text-color: #121212;
+$white: #ffffff;
+$gray: #6c757d;
+$light-gray: #f8f9fa;
+$success-color: #25D366; // WhatsApp green
+
+// Fonts
+$main-font: 'Poppins', sans-serif;
+
+// Breakpoints for media queries
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Box Shadow
+$shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+$shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+$shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+$shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+$shadow-glow-primary: 0 0 15px rgba($primary-color, 0.6);

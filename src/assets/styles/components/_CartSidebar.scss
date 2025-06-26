@@ -1,0 +1,115 @@
+@use '../variables' as *;
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  background-color: $white;
+  z-index: 100;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 99;
+  }
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    button {
+      color: $gray;
+      &:hover {
+        color: $text-color;
+      }
+    }
+  }
+  
+  &__empty {
+    text-align: center;
+    margin-top: 4rem;
+    color: $gray;
+    font-size: 1.1rem;
+  }
+  
+  &__items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  &__footer {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    background-color: $light-gray;
+  }
+  
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  &__clear-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    color: $gray;
+    font-size: 0.9rem;
+    &:hover {
+      color: $primary-dark;
+      text-decoration: underline;
+    }
+  }
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+  &__image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  &__details {
+    flex-grow: 1;
+  }
+
+  &__name {
+    font-weight: 600;
+    display: block;
+  }
+
+  &__price {
+    color: $gray;
+  }
+  
+  &__remove {
+    color: $gray;
+    &:hover {
+      color: $primary-dark;
+    }
+  }
+}
