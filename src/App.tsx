@@ -3,7 +3,10 @@ import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductModal from './components/ProductModal';
 import CartSidebar from './components/CartSidebar';
-import { products, Products } from './data/products'; 
+import { products, Products } from './data/products';
+import ShinyText from './components/ShinyText';
+
+
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
@@ -29,13 +32,12 @@ function App() {
   return (
     <>
       <Header onCartClick={() => setCartOpen(true)} />
-      
+
       <main className="container">
         {/* Seção de Catálogo */}
         <section id="catalogo" className="page-section">
-          <h2 className="page-section__title">Nosso Catálogo</h2>
-          <p className="page-section__subtitle">Encontre o look perfeito para o seu treino.</p>
-          
+          <ShinyText text="Encontre seu look perfeito" />
+
           <div className="filters">
             {filters.map(filter => (
               <button
@@ -50,10 +52,10 @@ function App() {
 
           <div className="product-grid">
             {filteredProducts.map(product => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                onImageClick={() => handleOpenModal(product)} 
+              <ProductCard
+                key={product.id}
+                product={product}
+                onImageClick={() => handleOpenModal(product)}
               />
             ))}
           </div>
@@ -64,8 +66,8 @@ function App() {
           <h2 className="page-section__title">Mais Populares 🔥</h2>
           <div className="product-grid">
             {popularProducts.map(product => (
-              <ProductCard 
-                key={product.id} 
+              <ProductCard
+                key={product.id}
                 product={product}
                 onImageClick={() => handleOpenModal(product)}
               />

@@ -50,6 +50,7 @@
   &__info {
     padding: 1rem;
     h3 {
+      color: $secondary-color;
       font-size: 1.1rem;
       font-weight: 700;
       white-space: nowrap;
@@ -59,15 +60,14 @@
   }
   
   &__price {
-    color: $primary-color;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
     margin: 0.5rem 0;
   }
   
   &__button {
     width: 100%;
-    background-color: $primary-color;
+    background-color: $secondary-color;
     color: $white;
     font-weight: 700;
     padding: 0.75rem 1rem;
@@ -79,7 +79,7 @@
     transition: all 0.3s ease;
     
     &:hover {
-      background-color: $primary-dark;
+      background-color: $secondary-color;
       box-shadow: $shadow-glow-primary;
     }
   }
