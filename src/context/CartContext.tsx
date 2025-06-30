@@ -1,16 +1,16 @@
 import { createContext, useState, useContext, type ReactNode } from 'react';
 // Certifique-se de que o caminho para seu arquivo de dados está correto
-import { Products } from '../data/products'; 
+import { Product } from '../types/Product';
 
 
 // 1. Defina os tipos
-export interface CartItem extends Products {
+export interface CartItem extends Product {
   quantity: number;
 }
 
 interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (product: Products) => void;
+  addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
   // Adicione estes para o sidebar
@@ -30,7 +30,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
-  const addToCart = (product: Products) => {
+  const addToCart = (product: Product) => {
     setCartItems(prevItems => {
       const itemExists = prevItems.find(item => item.id === product.id);
       if (itemExists) {

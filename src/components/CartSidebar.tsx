@@ -12,12 +12,12 @@ const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
   const { cartItems, removeFromCart, clearCart } = useCart();
   const VENDEDORA_WHATSAPP = "5581996825207";
 
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.preco * item.quantity, 0);
 
   const generateCartWhatsAppLink = () => {
     let message = "Olá! Gostaria de finalizar minha compra com os seguintes itens:\n\n";
     cartItems.forEach(item => {
-      message += `*${item.name}* (x${item.quantity}) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}\n`;
+      message += `*${item.nome}* (x${item.quantity}) - R$ ${(item.preco * item.quantity).toFixed(2).replace('.', ',')}\n`;
     });
     message += `\n*Total: R$ ${totalPrice.toFixed(2).replace('.', ',')}*`;
     return `https://wa.me/${VENDEDORA_WHATSAPP}?text=${encodeURIComponent(message)}`;
@@ -53,11 +53,11 @@ const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
                 <div className="cart-sidebar__items">
                   {cartItems.map(item => (
                     <div key={item.id} className="cart-item">
-                      <img src={item.image} alt={item.name} className="cart-item__image" />
+                      <img src={item.imagem} alt={item.nome} className="cart-item__image" />
                       <div className="cart-item__details">
-                        <span className="cart-item__name">{item.name}</span>
+                        <span className="cart-item__name">{item.nome}</span>
                         <span className="cart-item__price">
-                          {item.quantity} x R$ {item.price.toFixed(2).replace('.', ',')}
+                          {item.quantity} x R$ {item.preco.toFixed(2).replace('.', ',')}
                         </span>
                       </div>
                       <button onClick={() => removeFromCart(item.id)} className="cart-item__remove">

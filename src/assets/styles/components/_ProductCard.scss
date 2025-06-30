@@ -11,9 +11,11 @@
   &:hover {
     transform: translateY(-5px);
     box-shadow: $shadow-xl;
+
     .product-card__image {
       transform: scale(1.1);
     }
+
     .product-card__overlay {
       opacity: 1;
     }
@@ -46,9 +48,10 @@
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   &__info {
     padding: 1rem;
+
     h3 {
       color: $secondary-color;
       font-size: 1.1rem;
@@ -58,13 +61,13 @@
       text-overflow: ellipsis;
     }
   }
-  
+
   &__price {
     font-size: 1rem;
     font-weight: 700;
     margin: 0.5rem 0;
   }
-  
+
   &__button {
     width: 100%;
     background-color: $secondary-color;
@@ -77,10 +80,19 @@
     justify-content: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
-    
+
     &:hover {
       background-color: $secondary-color;
       box-shadow: $shadow-glow-primary;
+    }
+  }
+
+  .btn--whatsapp {
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+
+    svg {
+      margin-right: 0.3rem;
     }
   }
 }

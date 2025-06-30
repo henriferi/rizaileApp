@@ -1,33 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductModal from './components/ProductModal';
 import CartSidebar from './components/CartSidebar';
-import { products, Products } from './data/products';
 import ShinyText from './components/ShinyText';
-
-
+import { Product } from './types/Product';
 
 function App() {
-  const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isCartOpen, setCartOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('Todos');
+  const [loading, setLoading] = useState(true);
 
-  const filters = ['Todos', 'Legging', 'Top', 'Conjunto'];
+  const filters = [
+    { label: 'Todos', value: 'Todos' },
+    { label: 'Conjunto Legging', value: 'ConjuntoLegging' },
+    { label: 'Conjunto Short', value: 'ConjuntoShort' },
+    { label: 'Moda Praia', value: 'ModaPraia' },
+    { label: 'Meias', value: 'Meias' }
+  ];
+
+
+  useEffect(() => {
+    fetch('http://localhost:3000/produtos')
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Erro ao buscar produtos:', err);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredProducts = activeFilter === 'Todos'
     ? products
-    : products.filter(p => p.category === activeFilter);
+    : products.filter(p => p.categoria === activeFilter);
 
-  const popularProducts = products.filter(p => p.isPopular);
+  const popularProducts = products.filter(p => p.popular);
 
-  const handleOpenModal = (product: Products) => {
+  const handleOpenModal = (product: Product) => {
     setSelectedProduct(product);
   };
 
   const handleCloseModal = () => {
     setSelectedProduct(null);
   };
+
+  if (loading) return <p style={{ textAlign: 'center' }}>Carregando produtos...</p>;
 
   return (
     <>
@@ -41,11 +63,11 @@ function App() {
           <div className="filters">
             {filters.map(filter => (
               <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`filters__btn ${activeFilter === filter ? 'active' : ''}`}
+                key={filter.value}
+                onClick={() => setActiveFilter(filter.value)}
+                className={`filters__btn ${activeFilter === filter.value ? 'active' : ''}`}
               >
-                {filter}
+                {filter.label}
               </button>
             ))}
           </div>

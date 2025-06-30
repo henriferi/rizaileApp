@@ -93,25 +93,25 @@
 
   &__category {
     background-color: $secondary-color;
-    color: $text-color;
+    color: white;
     font-weight: 600;
-    padding: 0.25rem 0.75rem;
+    padding: 0.5rem 1rem;
     border-radius: 999px;
     align-self: flex-start;
     margin-bottom: 0.75rem;
   }
   
   &__description {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     color: $gray;
     flex-grow: 1;
     font-size: 1rem;
   }
 
   &__price {
-    font-size: 2.75rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    color: $primary-color;
+    color: $secondary-color;
     margin: 1.5rem 0;
   }
 
@@ -127,7 +127,7 @@
 .btn {
   width: 100%;
   font-weight: 700;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -137,10 +137,10 @@
   font-size: 1rem;
   
   &--primary {
-    background-color: $primary-color;
+    background-color: $secondary-color;
     color: $white;
     &:hover {
-      background-color: $primary-dark;
+      background-color: $secondary-color;
       box-shadow: $shadow-glow-primary;
     }
   }
