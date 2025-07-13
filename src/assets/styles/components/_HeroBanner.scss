@@ -1,0 +1,251 @@
+@use '../variables' as *;
+
+.hero-banner {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  overflow: hidden;
+  margin-bottom: 4rem;
+
+  @media (min-width: $breakpoint-md) {
+    height: 80vh;
+    min-height: 600px;
+  }
+
+  &__container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__slide {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba($secondary-color, 0.8) 0%,
+      rgba($primary-color, 0.6) 50%,
+      rgba($secondary-color, 0.9) 100%
+    );
+    z-index: 2;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: $white;
+    max-width: 800px;
+    padding: 0 2rem;
+
+    @media (min-width: $breakpoint-md) {
+      padding: 0 3rem;
+    }
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 5rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__description {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__cta {
+    background: linear-gradient(135deg, $primary-color, $primary-light);
+    color: $white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: $shadow-lg;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba($primary-color, 0.4);
+    }
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 1.2rem;
+      padding: 1.25rem 3rem;
+    }
+  }
+
+  // Navigation
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    background-color: rgba($white, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($white, 0.3);
+    color: $white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+
+    &:hover {
+      background-color: rgba($white, 0.3);
+      opacity: 1;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &--prev {
+      left: 2rem;
+    }
+
+    &--next {
+      right: 2rem;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 40px;
+      height: 40px;
+      
+      &--prev {
+        left: 1rem;
+      }
+
+      &--next {
+        right: 1rem;
+      }
+    }
+  }
+
+  // Dots Indicator
+  &__dots {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba($white, 0.4);
+    border: 2px solid rgba($white, 0.6);
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &.active {
+      background-color: $white;
+      transform: scale(1.2);
+      box-shadow: 0 0 10px rgba($white, 0.5);
+    }
+
+    &:hover:not(.active) {
+      background-color: rgba($white, 0.7);
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Animações adicionais
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

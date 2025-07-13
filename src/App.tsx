@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
+import HeroBanner from './components/HeroBanner';
 import ProductCard from './components/ProductCard';
 import ProductModal from './components/ProductModal';
 import CartSidebar from './components/CartSidebar';
@@ -54,6 +55,7 @@ function App() {
   return (
     <>
       <Header onCartClick={() => setCartOpen(true)} />
+      <HeroBanner />
 
       <main className="container">
         {/* Seção de Catálogo */}

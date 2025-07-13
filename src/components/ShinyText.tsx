@@ -7,7 +7,7 @@ type Props = {
 }
 
 const ShinyText: React.FC<Props> = ({ text }) => {
-  return <span className="shiny-text">{text}</span>
+  return <h2 className="shiny-text">{text}</h2>
 }
 
 export default ShinyText
