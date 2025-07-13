@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import HeroBanner from './components/HeroBanner';
+import FeaturesSection from './components/FeaturesSection';
+import TestimonialsSection from './components/TestimonialsSection';
+import NewsletterSection from './components/NewsletterSection';
+import Footer from './components/Footer';
 import ProductCard from './components/ProductCard';
 import ProductModal from './components/ProductModal';
 import CartSidebar from './components/CartSidebar';
 import ShinyText from './components/ShinyText';
 import { Product } from './types/Product';
+import { mockProducts } from './data/mockProducts';
 
 function App() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>(mockProducts);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isCartOpen, setCartOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('Todos');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const filters = [
     { label: 'Todos', value: 'Todos' },
@@ -23,18 +28,19 @@ function App() {
   ];
 
 
-  useEffect(() => {
-    fetch('http://localhost:3000/produtos')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Erro ao buscar produtos:', err);
-        setLoading(false);
-      });
-  }, []);
+  // Comentado para usar produtos mock
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/produtos')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setProducts(data);
+  //       setLoading(false);
+  //     })
+  //     .catch(err => {
+  //       console.error('Erro ao buscar produtos:', err);
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   const filteredProducts = activeFilter === 'Todos'
     ? products
@@ -56,6 +62,9 @@ function App() {
     <>
       <Header onCartClick={() => setCartOpen(true)} />
       <HeroBanner />
+
+      {/* Seção de Benefícios */}
+      <FeaturesSection />
 
       <main className="container">
         {/* Seção de Catálogo */}
@@ -99,6 +108,15 @@ function App() {
           </div>
         </section>
       </main>
+
+      {/* Seção de Depoimentos */}
+      <TestimonialsSection />
+
+      {/* Newsletter */}
+      <NewsletterSection />
+
+      {/* Footer */}
+      <Footer />
 
       <ProductModal product={selectedProduct} onClose={handleCloseModal} />
       <CartSidebar isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
