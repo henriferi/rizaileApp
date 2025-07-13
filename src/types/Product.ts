@@ -5,6 +5,7 @@ export interface Product {
   preco: number;
   categoria: string;
   imagem: string;
+  imagens?: string[];
   descricao: string;
   popular: boolean;
   criadoEm: string;
