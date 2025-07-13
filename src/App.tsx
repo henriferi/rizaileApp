@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useAdmin } from './context/AdminContext';
 import Header from './components/Header';
 import HeroBanner from './components/HeroBanner';
 import FeaturesSection from './components/FeaturesSection';
@@ -9,11 +11,11 @@ import ProductCard from './components/ProductCard';
 import ProductModal from './components/ProductModal';
 import CartSidebar from './components/CartSidebar';
 import ShinyText from './components/ShinyText';
-import { Product } from './types/Product';
-import { mockProducts } from './data/mockProducts';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 
-function App() {
-  const [products, setProducts] = useState<Product[]>(mockProducts);
+function MainApp() {
+  const { products } = useAdmin();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isCartOpen, setCartOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('Todos');
@@ -26,21 +28,6 @@ function App() {
     { label: 'Moda Praia', value: 'ModaPraia' },
     { label: 'Meias', value: 'Meias' }
   ];
-
-
-  // Comentado para usar produtos mock
-  // useEffect(() => {
-  //   fetch('http://localhost:3000/produtos')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setProducts(data);
-  //       setLoading(false);
-  //     })
-  //     .catch(err => {
-  //       console.error('Erro ao buscar produtos:', err);
-  //       setLoading(false);
-  //     });
-  // }, []);
 
   const filteredProducts = activeFilter === 'Todos'
     ? products
@@ -121,6 +108,18 @@ function App() {
       <ProductModal product={selectedProduct} onClose={handleCloseModal} />
       <CartSidebar isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
     </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      </Routes>
+    </Router>
   );
 }
 

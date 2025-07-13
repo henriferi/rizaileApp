@@ -1,54 +1,37 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAdmin } from '../context/AdminContext';
 
 const HeroBanner = () => {
+  const { slides } = useAdmin();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
-    {
-      id: 1,
-      image: 'https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'Conjuntos de Legging',
-      subtitle: 'Conforto e estilo para seus treinos',
-      description: 'Descubra nossa coleção de conjuntos de legging com tecnologia dry-fit e alta compressão',
-      cta: 'Ver Coleção'
-    },
-    {
-      id: 2,
-      image: 'https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'Conjuntos de Short',
-      subtitle: 'Liberdade de movimento total',
-      description: 'Perfeitos para corrida, funcional e atividades ao ar livre',
-      cta: 'Explorar'
-    },
-    {
-      id: 3,
-      image: 'https://images.pexels.com/photos/1263349/pexels-photo-1263349.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop',
-      title: 'Moda Praia Fitness',
-      subtitle: 'Estilo e proteção na praia',
-      description: 'Biquínis e maiôs esportivos para suas atividades aquáticas',
-      cta: 'Descobrir'
-    }
-  ];
+  // Filtrar apenas slides ativos e ordenar
+  const activeSlides = slides.filter(slide => slide.active).sort((a, b) => a.order - b.order);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % activeSlides.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + activeSlides.length) % activeSlides.length);
   };
 
   useEffect(() => {
+    if (activeSlides.length === 0) return;
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [activeSlides.length]);
 
   const scrollToCatalog = () => {
     document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Se não há slides ativos, não renderizar o banner
+  if (activeSlides.length === 0) {
+    return null;
+  }
   return (
     <section className="hero-banner">
       <div className="hero-banner__container">
@@ -63,8 +46,8 @@ const HeroBanner = () => {
           >
             <div className="hero-banner__image-wrapper">
               <img 
-                src={slides[currentSlide].image} 
-                alt={slides[currentSlide].title}
+                src={activeSlides[currentSlide].image} 
+                alt={activeSlides[currentSlide].title}
                 className="hero-banner__image"
               />
               <div className="hero-banner__overlay" />
@@ -77,7 +60,7 @@ const HeroBanner = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                {slides[currentSlide].title}
+                {activeSlides[currentSlide].title}
               </motion.h1>
               
               <motion.h2 
@@ -86,7 +69,7 @@ const HeroBanner = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
-                {slides[currentSlide].subtitle}
+                {activeSlides[currentSlide].subtitle}
               </motion.h2>
               
               <motion.p 
@@ -95,7 +78,7 @@ const HeroBanner = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
               >
-                {slides[currentSlide].description}
+                {activeSlides[currentSlide].description}
               </motion.p>
               
               <motion.button 
@@ -108,7 +91,7 @@ const HeroBanner = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <Play size={20} />
-                {slides[currentSlide].cta}
+                {activeSlides[currentSlide].cta}
               </motion.button>
             </div>
           </motion.div>
@@ -133,7 +116,7 @@ const HeroBanner = () => {
 
         {/* Dots Indicator */}
         <div className="hero-banner__dots">
-          {slides.map((_, index) => (
+          {activeSlides.map((_, index) => (
             <button
               key={index}
               className={`hero-banner__dot ${index === currentSlide ? 'active' : ''}`}
