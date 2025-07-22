@@ -321,13 +321,40 @@ const AdminDashboard = () => {
 
               <div className="admin-form__row">
                 <div className="admin-form__group">
-                  <label>Preço</label>
+                  <label>Preço Original</label>
+                  <input 
+                    type="number" 
+                    name="precoOriginal" 
+                    step="0.01"
+                    defaultValue={editingProduct?.precoOriginal}
+                    placeholder="Deixe vazio se não houver desconto"
+                  />
+                </div>
+
+                <div className="admin-form__group">
+                  <label>Desconto (%)</label>
+                  <input 
+                    type="number" 
+                    name="desconto" 
+                    min="0"
+                    max="100"
+                    step="1"
+                    defaultValue={editingProduct?.desconto}
+                    placeholder="Ex: 20 para 20% de desconto"
+                  />
+                </div>
+              </div>
+
+              <div className="admin-form__row">
+                <div className="admin-form__group">
+                  <label>Preço Final (sem desconto)</label>
                   <input 
                     type="number" 
                     name="preco" 
                     step="0.01"
                     defaultValue={editingProduct?.preco}
                     required 
+                    placeholder="Preço quando não há desconto"
                   />
                 </div>
 

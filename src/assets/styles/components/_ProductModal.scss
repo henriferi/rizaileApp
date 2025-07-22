@@ -197,11 +197,45 @@
     font-size: 1rem;
   }
 
+  &__pricing {
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  &__discount-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    box-shadow: $shadow-md;
+  }
+
+  &__prices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__original-price {
+    font-size: 1.1rem;
+    color: $gray;
+    text-decoration: line-through;
+  }
+
+  &__discounted-price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #e74c3c;
+  }
+
   &__price {
     font-size: 1.5rem;
     font-weight: 800;
     color: $secondary-color;
-    margin: 1.5rem 0;
   }
 
   &__actions {
