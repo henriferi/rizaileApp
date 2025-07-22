@@ -3,6 +3,8 @@ export interface Product {
   id: number;
   nome: string;
   preco: number;
+  precoOriginal?: number;
+  desconto?: number;
   categoria: string;
   imagem: string;
   imagens?: string[];

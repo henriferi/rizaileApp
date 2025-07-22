@@ -5,7 +5,9 @@ export const mockProducts: Product[] = [
   {
     id: 1,
     nome: "Conjunto PowerFit Rosa Neon",
-    preco: 189.90,
+    preco: 151.92,
+    precoOriginal: 189.90,
+    desconto: 20,
     categoria: "ConjuntoLegging",
     imagem: "https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=800",
     imagens: [
@@ -21,7 +23,9 @@ export const mockProducts: Product[] = [
   {
     id: 2,
     nome: "Conjunto Seamless Preto",
-    preco: 199.90,
+    preco: 179.91,
+    precoOriginal: 199.90,
+    desconto: 10,
     categoria: "ConjuntoLegging",
     imagem: "https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=800",
     imagens: [
@@ -71,7 +75,9 @@ export const mockProducts: Product[] = [
   {
     id: 5,
     nome: "Conjunto Short Runner Pink",
-    preco: 149.90,
+    preco: 119.92,
+    precoOriginal: 149.90,
+    desconto: 20,
     categoria: "ConjuntoShort",
     imagem: "https://images.pexels.com/photos/1552103/pexels-photo-1552103.jpeg?auto=compress&cs=tinysrgb&w=800",
     imagens: [
@@ -87,7 +93,9 @@ export const mockProducts: Product[] = [
   {
     id: 6,
     nome: "Conjunto Short Neon Verde",
-    preco: 159.90,
+    preco: 135.92,
+    precoOriginal: 159.90,
+    desconto: 15,
     categoria: "ConjuntoShort",
     imagem: "https://images.pexels.com/photos/1552106/pexels-photo-1552106.jpeg?auto=compress&cs=tinysrgb&w=800",
     imagens: [
@@ -121,7 +129,9 @@ export const mockProducts: Product[] = [
   {
     id: 8,
     nome: "Biquíni Esportivo Coral",
-    preco: 119.90,
+    preco: 95.92,
+    precoOriginal: 119.90,
+    desconto: 20,
     categoria: "ModaPraia",
     imagem: "https://images.pexels.com/photos/1263348/pexels-photo-1263348.jpeg?auto=compress&cs=tinysrgb&w=800",
     imagens: [
@@ -153,7 +163,9 @@ export const mockProducts: Product[] = [
   {
     id: 10,
     nome: "Biquíni High Waist Listrado",
-    preco: 129.90,
+    preco: 116.91,
+    precoOriginal: 129.90,
+    desconto: 10,
     categoria: "ModaPraia",
     imagem: "https://images.pexels.com/photos/1263346/pexels-photo-1263346.jpeg?auto=compress&cs=tinysrgb&w=800",
     imagens: [
@@ -187,7 +199,9 @@ export const mockProducts: Product[] = [
   {
     id: 12,
     nome: "Meias Compressão Running",
-    preco: 49.90,
+    preco: 39.92,
+    precoOriginal: 49.90,
+    desconto: 20,
     categoria: "Meias",
     imagem: "https://images.pexels.com/photos/1598506/pexels-photo-1598506.jpeg?auto=compress&cs=tinysrgb&w=800",
     imagens: [

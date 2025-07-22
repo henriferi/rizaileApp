@@ -44,9 +44,18 @@ const AdminDashboard = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     
+    const precoOriginal = formData.get('precoOriginal') ? parseFloat(formData.get('precoOriginal') as string) : undefined;
+    const desconto = formData.get('desconto') ? parseFloat(formData.get('desconto') as string) : undefined;
+    const preco = parseFloat(formData.get('preco') as string);
+    
+    // Calcular preço com desconto se houver desconto
+    const precoFinal = precoOriginal && desconto ? precoOriginal * (1 - desconto / 100) : preco;
+    
     const productData = {
       nome: formData.get('nome') as string,
-      preco: parseFloat(formData.get('preco') as string),
+      preco: precoFinal,
+      precoOriginal: precoOriginal,
+      desconto: desconto,
       categoria: formData.get('categoria') as string,
       imagem: formData.get('imagem') as string,
       imagens: [
@@ -159,6 +168,7 @@ const AdminDashboard = () => {
                       <th>Nome</th>
                       <th>Categoria</th>
                       <th>Preço</th>
+                      <th>Desconto</th>
                       <th>Popular</th>
                       <th>Ações</th>
                     </tr>
@@ -171,7 +181,24 @@ const AdminDashboard = () => {
                         </td>
                         <td>{product.nome}</td>
                         <td>{categorias.find(c => c.value === product.categoria)?.label}</td>
-                        <td>R$ {product.preco.toFixed(2)}</td>
+                        <td>
+                          {product.precoOriginal && product.desconto ? (
+                            <div>
+                              <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.9em' }}>
+                                R$ {product.precoOriginal.toFixed(2)}
+                              </span>
+                              <br />
+                              <span style={{ color: '#e74c3c', fontWeight: 'bold' }}>
+                                R$ {product.preco.toFixed(2)}
+                              </span>
+                            </div>
+                          ) : (
+                            `R$ ${product.preco.toFixed(2)}`
+                          )}
+                        </td>
+                        <td>
+                          {product.desconto ? `${product.desconto}%` : '-'}
+                        </td>
                         <td>{product.popular ? '✅' : '❌'}</td>
                         <td>
                           <div className="admin-table__actions">
