@@ -1,5 +1,6 @@
 // src/components/Header.tsx
 import { ShoppingBag, Flame } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 interface HeaderProps {
@@ -13,14 +14,17 @@ const Header = ({ onCartClick }: HeaderProps) => {
   return (
     <header className="header">
       <div className="container header__container">
-        <a href="/" className="header__logo">
+        <Link to="/" className="header__logo">
           <Flame size={28} />
           <span>Rizaile</span>
-        </a>
+        </Link>
         <nav className="header__nav">
           <a href="#catalogo">Catálogo</a>
           <a href="#populares">Populares</a>
           <a href="#">Contato</a>
+          <Link to="/admin" style={{ color: '#6c757d', fontSize: '0.9rem' }}>
+            Admin
+          </Link>
         </nav>
         <div className="header__cart-icon" onClick={onCartClick}>
           <ShoppingBag size={28} />

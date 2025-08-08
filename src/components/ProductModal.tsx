@@ -143,7 +143,27 @@ const ProductModal = ({ product, onClose }: ProductModalProps) => {
               <span className="product-modal__category">{categoriaLabel}</span>
               <h2>{product.nome}</h2>
               <p className="product-modal__description">{product.descricao}</p>
-              <p className="product-modal__price">R$ {product.preco.toFixed(2).replace('.', ',')}</p>
+              <div className="product-modal__pricing">
+                {product.precoOriginal && product.desconto ? (
+                  <>
+                    <div className="product-modal__discount-badge">
+                      -{product.desconto}% OFF
+                    </div>
+                    <div className="product-modal__prices">
+                      <span className="product-modal__original-price">
+                        De: R$ {product.precoOriginal.toFixed(2).replace('.', ',')}
+                      </span>
+                      <span className="product-modal__discounted-price">
+                        Por: R$ {product.preco.toFixed(2).replace('.', ',')}
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <span className="product-modal__price">
+                    R$ {product.preco.toFixed(2).replace('.', ',')}
+                  </span>
+                )}
+              </div>
               <div className="product-modal__actions">
                 <a
                   href={generateWhatsAppLink()}

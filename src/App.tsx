@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useAdmin } from './context/AdminContext';
 import Header from './components/Header';
 import HeroBanner from './components/HeroBanner';
 import FeaturesSection from './components/FeaturesSection';
@@ -120,6 +122,18 @@ function App() {
       <ProductModal product={selectedProduct} onClose={handleCloseModal} />
       <CartSidebar isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
     </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      </Routes>
+    </Router>
   );
 }
 

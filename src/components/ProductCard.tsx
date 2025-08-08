@@ -27,9 +27,27 @@ const ProductCard = ({ product, onImageClick }: ProductCardProps) => {
       </div>
       <div className="product-card__info">
         <h3>{product.nome}</h3>
-        <p className="product-card__price">
-          R$ {product.preco.toFixed(2).replace('.', ',')}
-        </p>
+        <div className="product-card__pricing">
+          {product.precoOriginal && product.desconto ? (
+            <>
+              <div className="product-card__discount-badge">
+                -{product.desconto}%
+              </div>
+              <div className="product-card__prices">
+                <span className="product-card__original-price">
+                  R$ {product.precoOriginal.toFixed(2).replace('.', ',')}
+                </span>
+                <span className="product-card__discounted-price">
+                  R$ {product.preco.toFixed(2).replace('.', ',')}
+                </span>
+              </div>
+            </>
+          ) : (
+            <span className="product-card__price">
+              R$ {product.preco.toFixed(2).replace('.', ',')}
+            </span>
+          )}
+        </div>
 
         <a
           href={generateWhatsAppLink()}
