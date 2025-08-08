@@ -12,6 +12,7 @@ import ProductModal from './components/ProductModal';
 import CartSidebar from './components/CartSidebar';
 import ShinyText from './components/ShinyText';
 import { Product } from './types/Product';
+import { mockProducts } from './data/mockProducts';
 
 function MainApp() {
   const [products, setProducts] = useState<Product[]>();
@@ -29,18 +30,10 @@ function MainApp() {
   ];
 
 
-  // Comentado para usar produtos mock
+  // Usando produtos mock locais
   useEffect(() => {
-    fetch('http://localhost:3000/produtos')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Erro ao buscar produtos:', err);
-        setLoading(false);
-      });
+    setProducts(mockProducts);
+    setLoading(false);
   }, []);
 
   const filteredProducts = activeFilter === 'Todos'
