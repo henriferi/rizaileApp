@@ -13,7 +13,7 @@ import CartSidebar from './components/CartSidebar';
 import ShinyText from './components/ShinyText';
 import { Product } from './types/Product';
 
-function App() {
+function MainApp() {
   const [products, setProducts] = useState<Product[]>();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isCartOpen, setCartOpen] = useState(false);
@@ -130,8 +130,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainApp />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );
