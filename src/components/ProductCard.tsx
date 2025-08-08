@@ -20,7 +20,7 @@ const ProductCard = ({ product, onImageClick }: ProductCardProps) => {
   return (
     <div className="product-card">
       <div className="product-card__image-wrapper" onClick={onImageClick}>
-        <img src={product.imagem} alt={product.nome} className="product-card__image" />
+        <img src={product.imagem.split(',')[0]} alt={product.nome} className="product-card__image" />
         <div className="product-card__overlay">
           <p>Ver Detalhes</p>
         </div>

@@ -10,10 +10,9 @@ import ProductModal from './components/ProductModal';
 import CartSidebar from './components/CartSidebar';
 import ShinyText from './components/ShinyText';
 import { Product } from './types/Product';
-import { mockProducts } from './data/mockProducts';
 
 function App() {
-  const [products, setProducts] = useState<Product[]>(mockProducts);
+  const [products, setProducts] = useState<Product[]>();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isCartOpen, setCartOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>('Todos');
@@ -29,24 +28,24 @@ function App() {
 
 
   // Comentado para usar produtos mock
-  // useEffect(() => {
-  //   fetch('http://localhost:3000/produtos')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setProducts(data);
-  //       setLoading(false);
-  //     })
-  //     .catch(err => {
-  //       console.error('Erro ao buscar produtos:', err);
-  //       setLoading(false);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch('http://localhost:3000/produtos')
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Erro ao buscar produtos:', err);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredProducts = activeFilter === 'Todos'
     ? products
-    : products.filter(p => p.categoria === activeFilter);
+    : products?.filter(p => p.categoria === activeFilter);
 
-  const popularProducts = products.filter(p => p.popular);
+  const popularProducts = products?.filter(p => p.popular);
 
   const handleOpenModal = (product: Product) => {
     setSelectedProduct(product);
@@ -84,7 +83,7 @@ function App() {
           </div>
 
           <div className="product-grid">
-            {filteredProducts.map(product => (
+            {filteredProducts?.map(product => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -98,7 +97,7 @@ function App() {
         <section id="populares" className="page-section">
           <h2 className="page-section__title">Mais Populares 🔥</h2>
           <div className="product-grid">
-            {popularProducts.map(product => (
+            {popularProducts?.map(product => (
               <ProductCard
                 key={product.id}
                 product={product}

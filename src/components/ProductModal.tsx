@@ -21,13 +21,27 @@ const ProductModal = ({ product, onClose }: ProductModalProps) => {
   const { addToCart } = useCart();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const VENDEDORA_WHATSAPP = "5581996825207";
-  
+
   if (!product) {
     return null;
   }
 
-  const images = product.imagens || [product.imagem];
-  
+  let images: string[] = [];
+
+  try {
+    const parsed = JSON.parse(product.imagem);
+    images = Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.warn("Erro ao parsear imagens do produto:", error);
+    images = product.imagem.split(',').map((url: string) => url.trim());
+  }
+
+
+
+  console.log('product.imagem:', product.imagem);
+  console.log('images array:', images);
+
+
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
@@ -73,13 +87,13 @@ const ProductModal = ({ product, onClose }: ProductModalProps) => {
             <button className="product-modal__close-btn" onClick={onClose}>
               <X size={28} />
             </button>
-            
+
             <div className="product-modal__image-slider">
               <div className="product-modal__image-wrapper">
                 <AnimatePresence mode="wait">
-                  <motion.img 
+                  <motion.img
                     key={currentImageIndex}
-                    src={images[currentImageIndex]} 
+                    src={images[currentImageIndex]}
                     alt={`${product.nome} - Imagem ${currentImageIndex + 1}`}
                     className="product-modal__image"
                     initial={{ opacity: 0, x: 100 }}
@@ -88,18 +102,18 @@ const ProductModal = ({ product, onClose }: ProductModalProps) => {
                     transition={{ duration: 0.3 }}
                   />
                 </AnimatePresence>
-                
+
                 {images.length > 1 && (
                   <>
-                    <button 
+                    <button
                       className="product-modal__nav product-modal__nav--prev"
                       onClick={prevImage}
                       aria-label="Imagem anterior"
                     >
                       <ChevronLeft size={20} />
                     </button>
-                    
-                    <button 
+
+                    <button
                       className="product-modal__nav product-modal__nav--next"
                       onClick={nextImage}
                       aria-label="Próxima imagem"
@@ -109,7 +123,7 @@ const ProductModal = ({ product, onClose }: ProductModalProps) => {
                   </>
                 )}
               </div>
-              
+
               {images.length > 1 && (
                 <div className="product-modal__thumbnails">
                   {images.map((image, index) => (
@@ -124,7 +138,7 @@ const ProductModal = ({ product, onClose }: ProductModalProps) => {
                 </div>
               )}
             </div>
-            
+
             <div className="product-modal__details">
               <span className="product-modal__category">{categoriaLabel}</span>
               <h2>{product.nome}</h2>
